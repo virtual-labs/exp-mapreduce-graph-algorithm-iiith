@@ -1,13 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<!-- Add CSS at the head of HTML file -->
-    <link rel="stylesheet" href="./css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/barecss@1.1.1/css/bare.min.css"> -->
+  <link rel="stylesheet" href="./css/main.css">
+  <title>Numerical Integration for π using MPI</title>
 </head>
 <body>
-		<!-- Your code goes here-->
+  <header>
+    <h1>Numerical Integration Method for Computing π using MPI</h1>
+  </header>
+  <section class="control-panel">
+    <label for="processes-input">Number of Processes</label>
+    <input type="range" id="processes-input" min="1" max="8" step="1" value="2">
+    <span id="processes-output">2</span>
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+    <label for="intervals-input">Number of Subintervals</label>
+    <input type="range" id="intervals-input" min="10" max="200" step="10" value="50">
+    <span id="intervals-output">50</span>
+
+    <button id="start">Start Calculation</button>
+    <button id="reset">Reset</button>
+  </section>
+
+  <div id="process-controls">
+    <!-- Controls for each process will be dynamically added here -->
+  </div>
+
+  <div id="process-details">
+
+    <!-- Details for each process will be dynamically added here -->
+  </div>
+
+  <section class="canvas-container">
+    <canvas id="display" width="800" height="400"></canvas>
+  </section>
+
+  <section class="results">
+    <h3>Results</h3>
+    <p>Computed π: <span id="result">0</span></p>
+    <p>Wall-clock time: <span id="runtime">0</span> s</p>
+    <p>Process time: <span id="spantime">0</span> s</p>
+  </section>
+
+  <script src="./js/main.js"></script>
 </body>
 </html>

@@ -71,19 +71,4 @@ Error handling, fault tolerance mechanisms, and process rank management in MPI a
 
 
 
-#### Numerical Integration Method for Computing π using MPI
-
-Here is a step-by-step outline for computing `π` via numerical integration in a distributed system:
-
-1. **Divide the Workload**: The interval `[0, 1]` is divided into `N` segments, where each process gets `N/P` segments (`P` is the number of processors). Each segment involves computing an area that contributes to `π`.
-2. **Local Computation**: Each process computes the area under the curve for its assigned segments using the formula for a circle, $y = \sqrt{1 - x^2}$.
-3. **Send Results to Master Node**: Each process sends its partial result to the master process using `MPI_Send`.
-4. **Aggregate Results**: The master node gathers all partial results using `MPI_Reduce`, sums them, and multiplies by `4` to get the final approximation of `π`.
-
-<br>
-<br>
-
-
-
-
 With this theoretical foundation, we can now encourage the reader to attempt the Pretest to assess their understanding of the concepts discussed. Following that, we will delve into the practical implementation of computing `π` using MPI in a distributed system.
