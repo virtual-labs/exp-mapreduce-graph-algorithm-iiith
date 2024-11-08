@@ -2,38 +2,89 @@
   "version": 2.0,
   "questions": [
     {
-      "question": "This is a Sample Question 1?",
+      "question": "What is the primary purpose of the Message Passing Interface (MPI) in distributed computing?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "To manage shared memory between processes",
+        "b": "To facilitate communication between distributed processes",
+        "c": "To handle only single-threaded tasks",
+        "d": "To store data in a centralized server"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. MPI is designed for distributed memory systems, not shared memory.",
+        "b": "Correct. MPI enables communication between processes across distributed systems.",
+        "c": "Incorrect. MPI is designed for parallel processing and can handle multi-threaded tasks.",
+        "d": "Incorrect. MPI does not rely on a centralized data store."
       },
-      "correctAnswer": "a",
+      "correctAnswer": "b",
       "difficulty": "beginner"
     },
     {
-      "question": "This is a Sample Question 2?",
+      "question": "Which MPI operation would you use to broadcast a variable from one process to all other processes?",
       "answers": {
-        "a": "answer1",
-        "b": "answer2",
-        "c": "answer3",
-        "d": "answer4"
+        "a": "MPI_Send",
+        "b": "MPI_Recv",
+        "c": "MPI_Bcast",
+        "d": "MPI_Reduce"
       },
       "explanations": {
-        "a": "Explanation 1  <a href='www.google.com'>here</a>",
-        "b": "Explanation 2",
-        "c": "Explanation 2",
-        "d": "Explanation 2"
+        "a": "Incorrect. MPI_Send is for point-to-point communication, not broadcasting.",
+        "b": "Incorrect. MPI_Recv is for receiving messages in point-to-point communication.",
+        "c": "Correct. MPI_Bcast broadcasts data from one process to all others in a communicator.",
+        "d": "Incorrect. MPI_Reduce aggregates values across processes, not broadcasting."
       },
       "correctAnswer": "c",
-      "difficulty": "beginner"
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which MPI function allows processes to perform a computation while waiting for messages?",
+      "answers": {
+        "a": "MPI_Wait",
+        "b": "MPI_Irecv",
+        "c": "MPI_Barrier",
+        "d": "MPI_Comm_split"
+      },
+      "explanations": {
+        "a": "Incorrect. MPI_Wait blocks the process until a specific operation completes.",
+        "b": "Correct. MPI_Irecv is a non-blocking receive operation, enabling computation overlap.",
+        "c": "Incorrect. MPI_Barrier synchronizes processes, blocking them until all reach the barrier.",
+        "d": "Incorrect. MPI_Comm_split is used for dividing communicators, not non-blocking communication."
+      },
+      "correctAnswer": "b",
+      "difficulty": "advanced"
+    },
+    {
+      "question": "What is the role of MPI_Reduce in distributed computations?",
+      "answers": {
+        "a": "To distribute data evenly among processes",
+        "b": "To gather data from all processes to a single process",
+        "c": "To aggregate values from all processes into one result",
+        "d": "To split data among different communicators"
+      },
+      "explanations": {
+        "a": "Incorrect. MPI_Reduce is used for aggregating values, not distributing them.",
+        "b": "Incorrect. MPI_Gather is the function for collecting data to a single process.",
+        "c": "Correct. MPI_Reduce aggregates values across processes into a single result.",
+        "d": "Incorrect. Communicator splitting is handled by MPI_Comm_split, not MPI_Reduce."
+      },
+      "correctAnswer": "c",
+      "difficulty": "intermediate"
+    },
+    {
+      "question": "Which of the following is a benefit of using non-blocking operations like MPI_Isend and MPI_Irecv in MPI?",
+      "answers": {
+        "a": "They allow overlapping communication with computation",
+        "b": "They synchronize all processes simultaneously",
+        "c": "They require fewer resources than blocking operations",
+        "d": "They improve error handling for distributed systems"
+      },
+      "explanations": {
+        "a": "Correct. Non-blocking operations enable computation to proceed while communication is pending.",
+        "b": "Incorrect. Non-blocking operations do not perform synchronization.",
+        "c": "Incorrect. Non-blocking operations can require careful resource management.",
+        "d": "Incorrect. Non-blocking operations do not specifically enhance error handling."
+      },
+      "correctAnswer": "a",
+      "difficulty": "advanced"
     }
   ]
 }
