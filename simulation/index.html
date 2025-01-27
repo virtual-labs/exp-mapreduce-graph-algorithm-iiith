@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/barecss@1.1.1/css/bare.min.css"> -->
+  <link rel="stylesheet" href="./css/main.css">
+  <title>Numerical Integration for π using MPI</title>
+</head>
+<body>
+  <!-- <header>
+    <h1>Numerical Integration Method for Computing π using MPI</h1>
+  </header> -->
+
+  <!-- Instructions -->
+  <div class="container">
+  <div class="columns is-centered">
+    <div class="column">
+    <div class="v-collapsible-instruction-container v-instruction-container">
+      <div class="v-collapsible is-size-5">Instructions</div>
+      <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
+        <p>
+          This experiment simulates a distributed system with multiple processes working together to
+          compute <code>π</code> using the trapezoidal rule for numerical integration. The trapezoidal
+          rule is a method for approximating the definite integral of a function by dividing the interval
+          into subintervals and approximating the area under the curve using trapezoids. In this
+          experiment, the function used is <code>y = √(1 - x²)</code>, which represents a quarter of a
+          circle with radius <code>1</code>. The area under the curve in the interval <code>[0, 1]</code>
+          is used to approximate the value of <code>π</code>. The experiment demonstrates how multiple
+          processes can work together to compute the integral and approximate <code>π</code> more efficiently
+          than a single process.
+        </p>
+        <p>...</p>
+        <ul style="list-style: disc;">
+          <li>
+            <strong>Setup Parameters:</strong>
+            <ul style="list-style: circle;">
+              <li>
+                Locate the "Number of Processes" slider in the <strong>Control Panel</strong>. This control
+                sets how many processes (simulated processors) will divide and compute the trapezoidal areas.
+                Adjust the slider between <code>1</code> and <code>8</code> processes.
+              </li>
+              <li>
+                Adjust the "Number of Subintervals" slider to set the precision of the computation. This
+                control sets the number of intervals the function will be divided into, which impacts the
+                accuracy of <code>π</code> computation.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Initialize the Experiment:</strong>
+            <ul style="list-style: circle;">
+              <li>
+                After setting the desired number of processes and subintervals, click the <strong>"Start
+                Calculation"</strong> button to begin.
+              </li>
+              <li>
+                The animation will display trapezoids being computed by each process within a visual representation
+                of the integral, displayed on the canvas. Observe the different trapezoid areas calculated by each
+                process as they appear sequentially.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Monitor Process Controls:</strong>
+            In the <strong>Process Controls</strong> section, adjust the speed of each process using the
+            slider to simulate processors running at different speeds. Observe how this affects the overall
+            computation time in the <strong>Results</strong> section.
+          </li>
+          <li>
+            <strong>Analyze Results:</strong>
+            As the computation progresses, the <strong>Results</strong> section displays:
+            <ul style="list-style: circle;">
+              <li>
+                <strong>Computed π:</strong>
+                The approximation of <code>π</code> as calculated by the processes.
+              </li>
+              <li>
+                <strong>Wall-clock Time:</strong>
+                The real time taken for the computation, which reflects the overall efficiency when using
+                multiple processes.
+              </li>
+              <li>
+                <strong>Process Time:</strong>
+                The total computation time for all processes combined, used for calculating efficiency.
+              </li>
+            </ul>
+            <li>
+              <strong>Reset if Needed:</strong>
+              To rerun the experiment with different parameters, click the <strong>"Reset"</strong> button.
+              This clears previous results and resets the canvas.
+            </li>
+          </li>
+        </ul>
+        <p>...</p>
+        <p>
+          The posttest quiz will evaluate your observations and understanding of the experiment. Please take
+          note of the posttest questions to ensure you capture the relevant details during the experiment.
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Wrapper -->
+  <section class="section">
+  <div class="columns">
+
+  <!-- Controls -->
+  <div class="column is-one-third">
+  <form class="box" class="control-panel" onsubmit="return false;">
+    <div id="simulation-controls">
+    <div class="field">
+      <label class="label" for="processes-input">Number of Processes</label>
+      <div class="control">
+      <input type="range" id="processes-input" min="1" max="8" step="1" value="2">
+      </div>
+      <p class="help">Processes: <span id="processes-output">2</span></p>
+    </div>
+    <div class="field">
+      <label class="label" for="intervals-input">Number of Subintervals</label>
+      <div class="control">
+      <input type="range" id="intervals-input" min="10" max="200" step="10" value="50">
+      </div>
+      <p class="help">Subintervals: <span id="intervals-output">50</span></p>
+    </div>
+    </div>
+    <div id="process-controls">
+      <!-- Controls for each process will be dynamically added here -->
+    </div>
+    <div class="field mt-2">
+      <div class="control">
+      <button class="button is-primary" id="start">Start Calculation</button>
+      <button class="button" id="reset">Reset</button>
+      </div>
+    </div>
+    <p class="help mt-4" id="process-details">
+      <!-- Details for each process will be dynamically added here -->
+    </p>
+    <div class="help mt-4" id="results">
+      <strong>Results</strong>
+      <div>Computed π: <span id="result">0</span></div>
+      <div>Wall-clock time: <span id="runtime">0</span> s</div>
+      <div>Process time: <span id="spantime">0</span> s</div>
+    </div>
+  </form>
+  </div>
+
+  <!-- Simulation environment -->
+  <div class="column is-two-thirds">
+  <div class="canvas-container">
+    <canvas id="display" width="800" height="400"></canvas>
+  </div>
+  </div>
+
+  <!-- End of Wrapper -->
+  </div>
+  </section>
+
+  <!-- Load the scripts -->
+  <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
+  <script src="./js/main.js"></script>
+<script src="../assets/js/iframeResize.js"></script>
+          
+          </body>
+</html>
