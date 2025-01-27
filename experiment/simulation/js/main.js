@@ -114,6 +114,7 @@ function startSimulation() {
   }
   // Prepare to draw.
   clearDisplay();
+  hideSimulationControls();
   drawProcessControls();
   drawProcessDetails();
   drawResults();
@@ -148,6 +149,7 @@ function stopSimulation() {
   // Clear the display, results, and process controls.
   clearDisplay();
   clearResults();
+  showSimulationControls();
   clearProcessControls();
   clearProcessDetails();
 }
@@ -314,10 +316,15 @@ function drawProcessControls() {
   var P = s.processes;
   IPROCESS_CONTROLS.innerHTML = '';
   for (let p=0; p<P; ++p) {
-    // Create elements.
+    // Create elements, assuming Bulma CSS.
+    let field = document.createElement('div');
+    field.className = 'field';
     let label = document.createElement('label');
+    label.className = 'label';
     label.htmlFor = `speed-process-${p}`;
     label.textContent = `Adjust P${p + 1}'s speed`;
+    let control = document.createElement('div');
+    control.className = 'control';
     let input = document.createElement('input');
     input.type = 'range';
     input.id = `speed-process-${p}`;
@@ -325,9 +332,18 @@ function drawProcessControls() {
     input.max = '10';
     input.step = '1';
     input.value = '1';
+    let help = document.createElement('p');
+    help.className = 'help';
+    help.textContent = `P${p + 1}'s speed: `;
     let span = document.createElement('span');
     span.id = `speed-process-${p}-value`;
     span.textContent = '1';
+    // Append elements.
+    help.appendChild(span);
+    control.appendChild(input);
+    field.appendChild(label);
+    field.appendChild(control);
+    field.appendChild(help);
     // Add event listener.
     input.oninput = function() {
       let speed = parseInt(this.value, 10);
@@ -335,9 +351,7 @@ function drawProcessControls() {
       changeProcessSpeed(p, speed);
     }
     // Append elements.
-    IPROCESS_CONTROLS.appendChild(label);
-    IPROCESS_CONTROLS.appendChild(input);
-    IPROCESS_CONTROLS.appendChild(span);
+    IPROCESS_CONTROLS.appendChild(field);
   }
 }
 
@@ -358,7 +372,7 @@ function drawProcessDetails() {
   var P = s.processes;
   IPROCESS_DETAILS.innerHTML = '';
   // Append a header.
-  var h3 = document.createElement('h3');
+  var h3 = document.createElement('strong');
   h3.textContent = 'Process Details';
   IPROCESS_DETAILS.appendChild(h3);
   // Append divs for each process.
@@ -385,6 +399,24 @@ function drawProcessDetails() {
  */
 function clearProcessDetails() {
   IPROCESS_DETAILS.innerHTML = '';
+}
+
+
+/**
+ * Hide the simulation controls.
+ */
+function hideSimulationControls() {
+  var e = document.getElementById('simulation-controls');
+  e.style.display = 'none';
+}
+
+
+/**
+ * Show the simulation controls.
+ */
+function showSimulationControls() {
+  var e = document.getElementById('simulation-controls');
+  e.style.display = 'block';
 }
 
 

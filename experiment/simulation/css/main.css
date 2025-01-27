@@ -51,24 +51,16 @@ button:hover {
   margin-top: 30px;
 }
 
+/* For the simulation display. */
 #display {
-  border: 1px solid black;
-  background-color: #ffffff;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  display: block;
+  margin: auto;
+  width: 100%;
 }
 
-.results {
-  margin-top: 20px;
-  font-size: 1.2rem;
-}
 
-#process-controls {
-  text-align: center;
-}
-
-#process-details * {
-  text-align: center;
-}
-
-.results {
-  text-align: center;
+#process-details, #results {
+  font-size: 0.8rem;
 }
